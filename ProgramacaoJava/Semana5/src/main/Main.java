@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import dominio.DiaDaSemana;
 
@@ -9,7 +10,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		var lista = new ArrayList<String>(Arrays.asList(args));
-		
+	
+		{lista.stream()
+			.filter(Predicate.not(Main::numInt))
+			.forEach(d -> System.out.println(d));
+			}
+	
 		{lista.stream()
 			.filter(Main::numInt)
 			.map(Integer::valueOf)
@@ -33,7 +39,7 @@ public class Main {
 			Integer.valueOf(text);
 			return true;
 		} catch (NumberFormatException e) {
-			System.out.println(text);
+			//System.out.println(text);
 			return false;
 			
 		}
